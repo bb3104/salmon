@@ -17,6 +17,6 @@ func (u RssArticleController) Index(c *gin.Context) {
 		c.Abort()
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"message": "User founded!", "articles": articles})
+	c.JSON(http.StatusOK, gin.H{"message": "Rss data founded!", "articles": articles})
 	return
 }

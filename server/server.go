@@ -6,25 +6,25 @@ import (
 )
 
 func Init() {
-	r := router()
-	r.Run()
+	router := router()
+	router.Run()
 }
 
 func router() *gin.Engine {
-	r := gin.Default()
+	router := gin.Default()
 
-	r.Use(gin.Logger())
-	r.Use(gin.Recovery())
+	router.Use(gin.Logger())
+	router.Use(gin.Recovery())
 
 	health := new(controllers.HealthController)
 
-	r.GET("/health", health.Status)
+	router.GET("/health", health.Status)
 
-	u := r.Group("/v1")
+	v1 := router.Group("/v1")
 	{
 		rss_article := new(controllers.RssArticleController)
-		u.GET("/rss_articles", rss_article.Index)
+		v1.GET("/rss_articles", rss_article.Index)
 	}
 
-	return r
+	return router
 }

@@ -14,11 +14,11 @@ type RssArticle struct {
 	CreatedAt   int64  `dynamo:"created_at"`
 }
 
-func (h RssArticle) GetAll() (*[]RssArticle, error) {
-	db := db.GetDB()
-	table := db.Table("engineee")
+func (h RssArticle) GetAll() ([]RssArticle, error) {
+	d := db.GetDB()
+	table := d.Table("engineee")
 
-	var results *[]RssArticle
+	var results []RssArticle
 
 	err := table.Scan().All(&results)
 	return results, err

@@ -5,24 +5,10 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/guregu/dynamo"
-	"github.com/joho/godotenv"
-	"log"
 	"os"
 )
 
-var (
-	db  *dynamo.DB
-	err error
-)
-
-func Init() *dynamo.DB {
-	if os.Getenv("ENV") == "development" {
-		err := godotenv.Load()
-		if err != nil {
-			log.Fatal("Error loading .env file")
-		}
-	}
-
+func GetDB() *dynamo.DB {
 	accessKey := os.Getenv("DYNAMO_DB_ACCESS_KEY")
 	secretKey := os.Getenv("DYNAMO_DB_SECRET_KEY")
 
@@ -33,9 +19,5 @@ func Init() *dynamo.DB {
 		Region:      aws.String("ap-northeast-1"),
 	})
 
-	return db
-}
-
-func GetDB() *dynamo.DB {
 	return db
 }

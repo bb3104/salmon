@@ -1,11 +1,12 @@
 package models
 
 import (
-	"testing" // テストで使える関数・構造体が用意されているパッケージをimport
+	"testing"
 )
 
 func TestGetAllSuccess(t *testing.T) {
-	result, err := GetAll()
+	rssArticleModel := new(RssArticle)
+	_, err := rssArticleModel.GetAll()
 	if err != nil {
 		t.Fatalf("failed test %#v", err)
 	}
